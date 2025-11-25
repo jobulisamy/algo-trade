@@ -53,7 +53,7 @@ TRADING LOGIC:\
 - 7 strategies with ensemble weights: RSI(12%), Momentum(12%), MACD(10%), Gap(8%), RF(18%), XGB(18%), LSTM(22%)\
 - 15 liquid symbols: SPY, QQQ, IWM, DIA, AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA, JPM, V, WMT, DIS\
 - 25+ technical indicators: SMA/EMA (5,10,20,50), RSI(14), MACD, BB, ATR, volume ratios, momentum indicators\
-- ML target: 3-class classification (BUY/HOLD/SELL) based on 5-day forward returns (\'b11.2% thresholds)\
+- ML target: 3-class classification (BUY/HOLD/SELL) based on 5-day forward returns (\'1.2% thresholds)\
 - Signal range: -1 (strong sell) to +1 (strong buy), trade if |signal| > 0.55\
 \
 RISK PARAMETERS:\
