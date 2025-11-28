@@ -1,7 +1,7 @@
-# Project Scope: ML-Enhanced Algorithmic Trading Bot
+# Project Scope: Independent Model and Strategy Trading
 
-## Purpose
-The ML-Enhanced Algorithmic Trading Bot is designed to execute trades on the stock market using a combination of traditional trading strategies and machine learning models. The bot integrates with the Alpaca Trade API for zero-commission trading and operates on a $100,000 paper trading portfolio. The goal is to optimize returns by leveraging ensemble-based decision-making and robust risk management.
+## Overview
+This project implements an algorithmic trading bot for Alpaca API, where each model and strategy operates and trades independently. There is no ensemble signal aggregation. Each model and strategy generates its own trading signal and executes trades based on its own logic and thresholds.
 
 ---
 
@@ -12,30 +12,51 @@ The project is implemented in a modular Jupyter Notebook with 15 distinct cells:
 3. **Data Layer**: Fetch and preprocess data using `DataFetcher` and `FeatureEngine`.
 4. **Traditional Strategies**: Implement 4 strategies (RSI, Momentum, MACD, Gap).
 5-7. **ML Models**: Train and use RandomForest, XGBoost, and LSTM models.
-8. **Signal Aggregator**: Combine strategy outputs using ensemble weights.
-9. **Risk Management**: Enforce position sizing, stop-loss, and circuit breakers.
-10. **Order Execution**: Place trades via Alpaca API.
-11. **Main Bot**: Orchestrate the workflow.
-12. **Testing & Validation**: Validate strategies and models.
-13. **Production Run**: Execute the bot in a live environment.
-14. **Performance Monitoring**: Track and log performance metrics.
-15. **Manual Controls**: Allow user overrides.
+8. **Risk Management**: Enforce position sizing, stop-loss, and circuit breakers.
+9. **Order Execution**: Place trades via Alpaca API.
+10. **Main Bot**: Orchestrate the workflow.
+11. **Testing & Validation**: Validate strategies and models.
+12. **Production Run**: Execute the bot in a live environment.
+13. **Performance Monitoring**: Track and log performance metrics.
+14. **Manual Controls**: Allow user overrides.
 
 ---
 
-## Trading Logic
-- **Strategies**: 7 strategies with ensemble weights:
-  - RSI: 12%
-  - Momentum: 12%
-  - MACD: 10%
-  - Gap: 8%
-  - RandomForest: 18%
-  - XGBoost: 18%
-  - LSTM: 22%
-- **Symbols**: 15 liquid stocks (e.g., SPY, QQQ, AAPL, MSFT, etc.).
-- **Indicators**: 25+ technical indicators, including SMA/EMA, RSI, MACD, Bollinger Bands, ATR, volume ratios, and momentum indicators.
-- **ML Target**: 3-class classification (BUY/HOLD/SELL) based on 5-day forward returns with ±1.2% thresholds.
-- **Signal Range**: -1 (strong sell) to +1 (strong buy). Trades are executed if |signal| > 0.55.
+## Key Features
+- **Independent Model Execution:**
+  - Random Forest, XGBoost, and LSTM models run separately.
+  - Each model loads its own trained parameters and makes predictions on the latest data.
+  - Trades are executed based on each model's signal and threshold.
+
+- **Independent Strategy Execution:**
+  - Traditional strategies (RSI Mean Reversion, Momentum Breakout, MACD Volume, Gap Fade) run independently.
+  - Each strategy generates its own signal and executes trades if its signal meets the defined threshold.
+
+- **Order Execution:**
+  - Each model and strategy places trades directly through the Alpaca API when its own signal triggers a buy or sell.
+  - No aggregation or weighting of signals across models/strategies.
+
+- **Risk Management:**
+  - Risk management checks (position sizing, stop loss, take profit, exposure) are applied per model and per strategy.
+  - Optionally, track positions and risk per model/strategy.
+
+- **Performance Tracking:**
+  - Trades and performance are tracked separately for each model and strategy.
+  - Results are reported and visualized independently.
+
+---
+
+## Excluded Features
+- No ensemble signal aggregation or weighted combination of signals.
+- No use of ensemble weights or ensemble thresholds.
+- No signal aggregator logic.
+
+---
+
+## Benefits
+- Clear visibility into the performance of each model and strategy.
+- Easier to analyze, optimize, and debug individual components.
+- Flexible framework for adding, removing, or updating models and strategies independently.
 
 ---
 
@@ -131,4 +152,10 @@ The project is implemented in a modular Jupyter Notebook with 15 distinct cells:
 
 ---
 
-This document provides a comprehensive overview of the ML-Enhanced Algorithmic Trading Bot, enabling developers to understand, implement, and extend the project.
+## Usage
+- Run the notebook to generate signals and execute trades for each model and strategy independently.
+- Review trade results and performance metrics for each component separately.
+
+---
+
+This document provides a comprehensive overview of the Independent Model and Strategy Trading Bot, enabling developers to understand, implement, and extend the project.
